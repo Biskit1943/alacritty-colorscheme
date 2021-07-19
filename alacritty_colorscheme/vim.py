@@ -4,6 +4,10 @@ from pynvim import attach
 
 
 def template_vimrc_background(colorscheme: str) -> str:
+    # fix -256 themes not known by alacritty
+    if colorscheme.endswith("-256"):
+        colorscheme = colorscheme.split("-256")[0]
+
     command = (
         f"if !exists('g:colors_name') || g:colors_name != '{colorscheme}'\n"
         f"  colorscheme {colorscheme}\n"
